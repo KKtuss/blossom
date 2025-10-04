@@ -13,6 +13,7 @@ yarn-error.log*
 
 # API Keys and sensitive data
 config.js
+public/config.js
 *.env
 .env*
 
