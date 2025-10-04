@@ -61,6 +61,12 @@ app.get('/Github button.png', (req, res) => {
     res.sendFile(path.join(__dirname, 'Github button.png'));
 });
 
+// Serve font stylesheet
+app.get('/Fonts/QuanSlim/stylesheet.css', (req, res) => {
+    res.setHeader('Content-Type', 'text/css');
+    res.sendFile(path.join(__dirname, 'Fonts', 'QuanSlim', 'stylesheet.css'));
+});
+
 // Serve font files
 app.get('/Fonts/*', (req, res) => {
     const filePath = path.join(__dirname, req.path);

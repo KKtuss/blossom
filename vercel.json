@@ -39,6 +39,10 @@
       "dest": "/server.js"
     },
     {
+      "src": "/Fonts/QuanSlim/stylesheet.css",
+      "dest": "/server.js"
+    },
+    {
       "src": "/Fonts/(.*)",
       "dest": "/server.js"
     },

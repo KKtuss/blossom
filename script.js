@@ -9343,4 +9343,3 @@ function typewriterEffect() {
     // Start typewriter effect after title animation (2s delay)
     setTimeout(typeChar, 2000);
 }
-}
