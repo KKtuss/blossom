@@ -11,10 +11,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
-// Serve the main HTML file
+// Serve the main HTML file for root path
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
+
 
 // API endpoint to generate art using Claude
 app.post('/api/generate-art', async (req, res) => {

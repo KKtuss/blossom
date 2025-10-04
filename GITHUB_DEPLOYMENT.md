@@ -187,6 +187,13 @@ canvai/
 - **Must have** `package.json` and `vercel.json`
 - **Must have** `server.js` as main entry point
 
+### ⚠️ Troubleshooting 404 Errors:
+If you see 404 errors for static files (CSS, JS, images):
+1. **Check file names** - ensure no spaces in filenames
+2. **Verify all files** are committed to GitHub
+3. **Redeploy** - sometimes Vercel needs a fresh deployment
+4. **Check console** - look for specific file paths causing issues
+
 ## 🎉 You're Done!
 
 Once deployed, you'll have:
