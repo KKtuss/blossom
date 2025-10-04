@@ -8,12 +8,70 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors());
+
+// Set Content Security Policy to allow external resources
+app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy', 
+        "default-src 'self'; " +
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+        "font-src 'self' https://fonts.gstatic.com; " +
+        "script-src 'self' 'unsafe-inline'; " +
+        "img-src 'self' data:; " +
+        "connect-src 'self' https://api.anthropic.com;"
+    );
+    next();
+});
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
 // Serve the main HTML file for root path
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Explicit routes for static files to ensure proper MIME types
+app.get('/styles.css', (req, res) => {
+    res.setHeader('Content-Type', 'text/css');
+    res.sendFile(path.join(__dirname, 'styles.css'));
+});
+
+app.get('/script.js', (req, res) => {
+    res.setHeader('Content-Type', 'application/javascript');
+    res.sendFile(path.join(__dirname, 'script.js'));
+});
+
+app.get('/config.js', (req, res) => {
+    res.setHeader('Content-Type', 'application/javascript');
+    res.sendFile(path.join(__dirname, 'config.js'));
+});
+
+app.get('/blossompix.png', (req, res) => {
+    res.setHeader('Content-Type', 'image/png');
+    res.sendFile(path.join(__dirname, 'blossompix.png'));
+});
+
+app.get('/twitter button.png', (req, res) => {
+    res.setHeader('Content-Type', 'image/png');
+    res.sendFile(path.join(__dirname, 'twitter button.png'));
+});
+
+app.get('/Github button.png', (req, res) => {
+    res.setHeader('Content-Type', 'image/png');
+    res.sendFile(path.join(__dirname, 'Github button.png'));
+});
+
+// Serve font files
+app.get('/Fonts/*', (req, res) => {
+    const filePath = path.join(__dirname, req.path);
+    const ext = path.extname(filePath).toLowerCase();
+    
+    if (ext === '.woff') res.setHeader('Content-Type', 'font/woff');
+    else if (ext === '.woff2') res.setHeader('Content-Type', 'font/woff2');
+    else if (ext === '.ttf') res.setHeader('Content-Type', 'font/ttf');
+    else if (ext === '.eot') res.setHeader('Content-Type', 'application/vnd.ms-fontobject');
+    
+    res.sendFile(filePath);
 });
 
 

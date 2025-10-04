@@ -15,6 +15,34 @@
       "dest": "/server.js"
     },
     {
+      "src": "/styles.css",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/script.js",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/config.js",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/blossompix.png",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/twitter button.png",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/Github button.png",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/Fonts/(.*)",
+      "dest": "/server.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "/server.js"
     }
