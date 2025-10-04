@@ -62,9 +62,22 @@ app.get('/Github button.png', (req, res) => {
 });
 
 // Serve font stylesheet
-app.get('/Fonts/QuanSlim/stylesheet.css', (req, res) => {
+app.get('/QuanSlim/stylesheet.css', (req, res) => {
     res.setHeader('Content-Type', 'text/css');
-    res.sendFile(path.join(__dirname, 'Fonts', 'QuanSlim', 'stylesheet.css'));
+    res.sendFile(path.join(__dirname, 'QuanSlim', 'stylesheet.css'));
+});
+
+// Serve QuanSlim font files
+app.get('/QuanSlim/*', (req, res) => {
+    const filePath = path.join(__dirname, req.path);
+    const ext = path.extname(filePath).toLowerCase();
+    
+    if (ext === '.woff') res.setHeader('Content-Type', 'font/woff');
+    else if (ext === '.woff2') res.setHeader('Content-Type', 'font/woff2');
+    else if (ext === '.ttf') res.setHeader('Content-Type', 'font/ttf');
+    else if (ext === '.eot') res.setHeader('Content-Type', 'application/vnd.ms-fontobject');
+    
+    res.sendFile(filePath);
 });
 
 // Serve font files
