@@ -1,15 +1,17 @@
 const express = require('express');
-const cors = require('cors');
 const path = require('path');
-require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
 
-// Middleware
-app.use(cors());
+// CORS configuration
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'x-api-key']
+}));
 
-// Set Content Security Policy to allow external resources
+// Security headers
 app.use((req, res, next) => {
     res.setHeader('Content-Security-Policy', 
         "default-src 'self'; " +
@@ -30,10 +32,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Serve font test page
-app.get('/font-test', (req, res) => {
-    res.sendFile(path.join(__dirname, 'font-test.html'));
-});
+// Font test page removed
 
 // Explicit routes for static files to ensure proper MIME types
 app.get('/styles.css', (req, res) => {
@@ -89,44 +88,22 @@ app.get('/QuanSlim/*', (req, res) => {
     res.sendFile(filePath);
 });
 
-// Serve font files
-app.get('/Fonts/*', (req, res) => {
-    const filePath = path.join(__dirname, req.path);
-    const ext = path.extname(filePath).toLowerCase();
-    
-    if (ext === '.woff') res.setHeader('Content-Type', 'font/woff');
-    else if (ext === '.woff2') res.setHeader('Content-Type', 'font/woff2');
-    else if (ext === '.ttf') res.setHeader('Content-Type', 'font/ttf');
-    else if (ext === '.eot') res.setHeader('Content-Type', 'application/vnd.ms-fontobject');
-    
-    res.sendFile(filePath);
-});
-
-
-// API endpoint to generate art using Claude
+// API route for art generation
 app.post('/api/generate-art', async (req, res) => {
-    console.log('POST /api/generate-art endpoint hit');
-    try {
-        console.log('Received request:', req.body);
-        const { prompt, apiKey } = req.body;
-        
-        // Use API key from request or environment variable
-        const finalApiKey = apiKey || process.env.CLAUDE_API_KEY;
-        
-        if (!finalApiKey || finalApiKey === 'YOUR_CLAUDE_API_KEY_HERE') {
-            return res.status(400).json({ 
-                error: 'API key not provided or invalid' 
-            });
-        }
-        
-        if (!prompt) {
-            return res.status(400).json({ 
-                error: 'Prompt not provided' 
-            });
-        }
+    const { apiKey, prompt } = req.body;
+    
+    // Use API key from request body or environment variable
+    const finalApiKey = apiKey || process.env.CLAUDE_API_KEY;
+    
+    if (!finalApiKey) {
+        return res.status(400).json({ 
+            error: 'Claude API key required',
+            message: 'Please provide your Claude API key'
+        });
+    }
 
-        // Make request to Claude API
-        const claudeResponse = await fetch('https://api.anthropic.com/v1/messages', {
+    try {
+        const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -134,37 +111,31 @@ app.post('/api/generate-art', async (req, res) => {
                 'anthropic-version': '2023-06-01'
             },
             body: JSON.stringify({
-                model: 'claude-3-5-haiku-20241022',
+                model: 'claude-3-haiku-20240307',
                 max_tokens: 4000,
                 messages: [{
                     role: 'user',
-                    content: prompt
+                    content: prompt || 'Generate a new pixel art masterpiece with detailed instructions for a 32x32 canvas.'
                 }]
             })
         });
 
-        if (!claudeResponse.ok) {
-            const errorData = await claudeResponse.text();
-            console.error('Claude API error:', errorData);
-            return res.status(claudeResponse.status).json({ 
-                error: `Claude API error: ${claudeResponse.status}` 
-            });
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`API request failed: ${response.status} ${errorData.error?.message || response.statusText}`);
         }
 
-        const claudeData = await claudeResponse.json();
-        const content = claudeData.content[0].text;
-        
-        console.log('Claude response content:', content);
-        
+        const data = await response.json();
         res.json({ 
-            success: true, 
-            content: content 
+            content: data.content[0].text,
+            usage: data.usage 
         });
-        
+
     } catch (error) {
-        console.error('Server error:', error);
+        console.error('Claude API Error:', error);
         res.status(500).json({ 
-            error: 'Internal server error: ' + error.message 
+            error: 'Failed to generate art',
+            message: error.message 
         });
     }
 });
@@ -172,7 +143,8 @@ app.post('/api/generate-art', async (req, res) => {
 // Health check endpoint
 app.get('/api/health', (req, res) => {
     res.json({ 
-        status: 'OK', 
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
         message: 'CanvAI Backend Server is running' 
     });
 });
@@ -191,15 +163,6 @@ app.get('*', (req, res) => {
     console.log('🚨 Fallback route hit for:', req.path);
     res.status(404).send('File not found: ' + req.path);
 });
-
-// Only start server if not running on Vercel
-if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
-    app.listen(PORT, () => {
-        console.log(`🚀 CanvAI Backend Server running on http://localhost:${PORT}`);
-        console.log(`📱 Open your browser and navigate to http://localhost:${PORT}`);
-        console.log(`🔑 Make sure your Claude API key is configured in environment variables`);
-    });
-}
 
 // Export for Vercel
 module.exports = app;
