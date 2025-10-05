@@ -1164,9 +1164,6 @@ POSITIONING: Be CREATIVE and ORGANIC with element placement! Avoid predictable, 
         
         console.log(`🎨 Cleanup complete: ${originalCount} → ${cleanedGallery.length} artworks`);
         
-        // Reload gallery
-        this.loadGallery();
-        
         return cleanedGallery.length;
     }
     

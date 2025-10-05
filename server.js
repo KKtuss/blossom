@@ -61,28 +61,7 @@ app.get('/Github button.png', (req, res) => {
     res.sendFile(path.join(__dirname, 'Github button.png'));
 });
 
-// Serve font stylesheet
-app.get('/QuanSlim/stylesheet.css', (req, res) => {
-    console.log('📄 Serving QuanSlim stylesheet.css');
-    res.setHeader('Content-Type', 'text/css');
-    res.setHeader('Cache-Control', 'public, max-age=3600');
-    res.sendFile(path.join(__dirname, 'QuanSlim', 'stylesheet.css'));
-});
-
-// Serve QuanSlim font files
-app.get('/QuanSlim/*', (req, res) => {
-    console.log('🔤 Serving QuanSlim font file:', req.path);
-    const filePath = path.join(__dirname, req.path);
-    const ext = path.extname(filePath).toLowerCase();
-    
-    if (ext === '.woff') res.setHeader('Content-Type', 'font/woff');
-    else if (ext === '.woff2') res.setHeader('Content-Type', 'font/woff2');
-    else if (ext === '.ttf') res.setHeader('Content-Type', 'font/ttf');
-    else if (ext === '.eot') res.setHeader('Content-Type', 'application/vnd.ms-fontobject');
-    
-    res.setHeader('Cache-Control', 'public, max-age=86400');
-    res.sendFile(filePath);
-});
+// Font serving is now handled by /api/static.js
 
 // Serve font files
 app.get('/Fonts/*', (req, res) => {
@@ -181,13 +160,7 @@ app.use((req, res, next) => {
 // Fallback route for debugging - catch any missed requests
 app.get('*', (req, res) => {
     console.log('🚨 Fallback route hit for:', req.path);
-    if (req.path === '/QuanSlim/stylesheet.css') {
-        console.log('📄 Fallback serving QuanSlim stylesheet.css');
-        res.setHeader('Content-Type', 'text/css');
-        res.sendFile(path.join(__dirname, 'QuanSlim', 'stylesheet.css'));
-    } else {
-        res.status(404).send('File not found: ' + req.path);
-    }
+    res.status(404).send('File not found: ' + req.path);
 });
 
 // Only start server if not running on Vercel

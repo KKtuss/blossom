@@ -12,43 +12,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/styles.css",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/script.js",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/config.js",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/blossompix.png",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/twitter button.png",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/Github button.png",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/QuanSlim/stylesheet.css",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/QuanSlim/(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/Fonts/(.*)",
-      "dest": "/server.js"
+      "dest": "/api/$1"
     },
     {
       "src": "/(.*)",
