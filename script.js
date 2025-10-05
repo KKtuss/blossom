@@ -10,6 +10,7 @@ class ClaudeArtGallery {
         this.paintingStartTime = null; // Track when painting session started
         this.isGenerating = false;
         this.apiKey = null;
+        this.galleryCleanedUp = false; // Flag to prevent multiple cleanups
         
         // Claude API configuration
         // Auto-detect environment and use appropriate endpoint
@@ -1138,6 +1139,12 @@ POSITIONING: Be CREATIVE and ORGANIC with element placement! Avoid predictable, 
     
     // Clean up non-32x32 artworks from gallery
     cleanupGallery() {
+        // Only run cleanup once per session
+        if (this.galleryCleanedUp) {
+            console.log('🎨 Gallery already cleaned up, skipping...');
+            return 0;
+        }
+        
         console.log('🎨 Cleaning up non-32x32 artworks...');
         
         const gallery = this.getSavedArtworks();
@@ -1163,6 +1170,9 @@ POSITIONING: Be CREATIVE and ORGANIC with element placement! Avoid predictable, 
         localStorage.setItem('claude_artworks', JSON.stringify(cleanedGallery));
         
         console.log(`🎨 Cleanup complete: ${originalCount} → ${cleanedGallery.length} artworks`);
+        
+        // Mark as cleaned up
+        this.galleryCleanedUp = true;
         
         return cleanedGallery.length;
     }
