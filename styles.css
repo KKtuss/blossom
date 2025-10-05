@@ -88,6 +88,12 @@ body {
     visibility: hidden;
 }
 
+.intro-page.slide-up {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 1s ease, opacity 1s ease;
+}
+
 .intro-content {
     text-align: center;
     max-width: 600px;

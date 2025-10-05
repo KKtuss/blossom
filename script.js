@@ -9307,8 +9307,15 @@ function updateHeaderStats() {
 // Intro page functionality
 function enterWebsite() {
     const introPage = document.getElementById('introPage');
+    const mainWebsite = document.getElementById('mainWebsite');
+    
     if (introPage) {
         introPage.classList.add('slide-up');
+        
+        // Show main website immediately
+        if (mainWebsite) {
+            mainWebsite.classList.add('visible');
+        }
         
         // Remove the intro page from DOM after animation completes
         setTimeout(() => {
