@@ -9309,18 +9309,12 @@ function enterWebsite() {
     const introPage = document.getElementById('introPage');
     const mainWebsite = document.getElementById('mainWebsite');
     
-    if (introPage) {
-        introPage.classList.add('slide-up');
+    if (introPage && mainWebsite) {
+        // Hide intro page
+        introPage.classList.add('hidden');
         
-        // Show main website immediately
-        if (mainWebsite) {
-            mainWebsite.classList.add('visible');
-        }
-        
-        // Remove the intro page from DOM after animation completes
-        setTimeout(() => {
-            introPage.style.display = 'none';
-        }, 1000);
+        // Show main website
+        mainWebsite.classList.add('visible');
     }
 }
 
