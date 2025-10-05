@@ -65,28 +65,7 @@ app.get('/Github button.png', (req, res) => {
     res.sendFile(path.join(__dirname, 'Github button.png'));
 });
 
-// Serve font stylesheet
-app.get('/QuanSlim/stylesheet.css', (req, res) => {
-    console.log('📄 Serving QuanSlim stylesheet.css from:', path.join(__dirname, 'QuanSlim', 'stylesheet.css'));
-    res.setHeader('Content-Type', 'text/css');
-    res.setHeader('Cache-Control', 'public, max-age=3600');
-    res.sendFile(path.join(__dirname, 'QuanSlim', 'stylesheet.css'));
-});
-
-// Serve QuanSlim font files
-app.get('/QuanSlim/*', (req, res) => {
-    console.log('🔤 Serving QuanSlim font file:', req.path);
-    const filePath = path.join(__dirname, req.path);
-    const ext = path.extname(filePath).toLowerCase();
-    
-    if (ext === '.woff') res.setHeader('Content-Type', 'font/woff');
-    else if (ext === '.woff2') res.setHeader('Content-Type', 'font/woff2');
-    else if (ext === '.ttf') res.setHeader('Content-Type', 'font/ttf');
-    else if (ext === '.eot') res.setHeader('Content-Type', 'application/vnd.ms-fontobject');
-    
-    res.setHeader('Cache-Control', 'public, max-age=86400');
-    res.sendFile(filePath);
-});
+// Font serving removed - using Google Fonts
 
 // API route for art generation
 app.post('/api/generate-art', async (req, res) => {

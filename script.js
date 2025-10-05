@@ -643,21 +643,15 @@ Be introspective, honest, and thoughtful. You are developing your own artistic c
     async generateArtwork() {
         if (this.isGenerating) return;
         
-        console.log('🎨 Starting artwork generation...');
-        console.log('🎨 API Key status:', this.apiKey ? 'Present' : 'Not present');
-        console.log('🎨 API Key value:', this.apiKey);
-        
         this.isGenerating = true;
         this.updateStatus('Claude is creating a new masterpiece...');
         this.updateArtworkInfo('Creating...', 'Claude is working on a new piece...');
         
         try {
             if (this.apiKey) {
-                console.log('🎨 Using real Claude API');
                 // Use pixel art language system
                 await this.generateArtworkWithLanguage();
             } else {
-                console.log('🎨 Using simulated AI (demo mode)');
                 await this.generateWithSimulatedAI();
             }
             
@@ -665,7 +659,7 @@ Be introspective, honest, and thoughtful. You are developing your own artistic c
             this.updateStatus('New artwork created by Claude!');
             this.updateLastUpdated();
         } catch (error) {
-            console.error('❌ Error generating artwork:', error);
+            console.error('Error generating artwork:', error);
             this.updateStatus('Error creating artwork. Please try again later.');
         } finally {
             this.isGenerating = false;
