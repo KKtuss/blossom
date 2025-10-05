@@ -8124,6 +8124,10 @@ Respond as a direct answer to the user's question - this is not a JSON response.
 
     loadGallery() {
         const gallery = document.getElementById('gallery');
+        
+        // Clean up old 64x64 artworks first
+        this.cleanupGallery();
+        
         const artworks = this.getSavedArtworks();
         
         // Sort artworks by timestamp (newest first)
