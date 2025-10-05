@@ -517,13 +517,7 @@ Be introspective, honest, and thoughtful. You are developing your own artistic c
         // Get API key from config file or environment
         this.apiKey = typeof CLAUDE_API_KEY !== 'undefined' ? CLAUDE_API_KEY : 'YOUR_CLAUDE_API_KEY_HERE';
         
-        // Check if we're on Vercel and have environment variable
-        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-            // On Vercel, the API key will be handled by the server
-            this.apiKey = 'VERCEL_DEPLOYMENT'; // Special flag for Vercel
-            this.updateStatus('Claude is ready to create art on Vercel!');
-            this.updateConsciousnessDisplay();
-        } else if (this.apiKey === 'YOUR_CLAUDE_API_KEY_HERE') {
+        if (this.apiKey === 'YOUR_CLAUDE_API_KEY_HERE') {
             // Fallback to demo mode if no key is configured
             this.apiKey = null;
             this.updateStatus('Claude is working in demo mode...');

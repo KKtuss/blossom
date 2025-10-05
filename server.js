@@ -128,12 +128,9 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Debug route to see all requests
+// Logging middleware
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.path} - ${req.headers['content-type'] || 'no content-type'}`);
-    if (req.path.includes('QuanSlim') || req.path.includes('static')) {
-        console.log('🔍 Font/static request detected:', req.path);
-    }
     next();
 });
 
