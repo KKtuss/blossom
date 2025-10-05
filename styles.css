@@ -1,29 +1,38 @@
 /* QuanSlim Font Definitions */
 @font-face {
     font-family: 'Quan Slim';
-    src: url('./QuanSlim/QuanSlim-Regular.woff2?v=4') format('woff2'),
-         url('./QuanSlim/QuanSlim-Regular.woff?v=4') format('woff'),
-         url('./QuanSlim/QuanSlim-Regular.ttf?v=4') format('truetype');
-    font-weight: 400;
+    src: url('./QuanSlim/QuanSlim-Regular.eot');
+    src: local('Quan Slim'), local('QuanSlim-Regular'),
+        url('./QuanSlim/QuanSlim-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./QuanSlim/QuanSlim-Regular.woff2?v=5') format('woff2'),
+        url('./QuanSlim/QuanSlim-Regular.woff?v=5') format('woff'),
+        url('./QuanSlim/QuanSlim-Regular.ttf?v=5') format('truetype');
+    font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'Quan Slim';
-    src: url('./QuanSlim/QuanSlim-Bold.woff2?v=4') format('woff2'),
-         url('./QuanSlim/QuanSlim-Bold.woff?v=4') format('woff'),
-         url('./QuanSlim/QuanSlim-Bold.ttf?v=4') format('truetype');
-    font-weight: 700;
+    src: url('./QuanSlim/QuanSlim-Bold.eot');
+    src: local('Quan Slim Bold'), local('QuanSlim-Bold'),
+        url('./QuanSlim/QuanSlim-Bold.eot?#iefix') format('embedded-opentype'),
+        url('./QuanSlim/QuanSlim-Bold.woff2?v=5') format('woff2'),
+        url('./QuanSlim/QuanSlim-Bold.woff?v=5') format('woff'),
+        url('./QuanSlim/QuanSlim-Bold.ttf?v=5') format('truetype');
+    font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'Quan Slim';
-    src: url('./QuanSlim/QuanSlim-Light.woff2?v=4') format('woff2'),
-         url('./QuanSlim/QuanSlim-Light.woff?v=4') format('woff'),
-         url('./QuanSlim/QuanSlim-Light.ttf?v=4') format('truetype');
+    src: url('./QuanSlim/QuanSlim-Light.eot');
+    src: local('Quan Slim Light'), local('QuanSlim-Light'),
+        url('./QuanSlim/QuanSlim-Light.eot?#iefix') format('embedded-opentype'),
+        url('./QuanSlim/QuanSlim-Light.woff2?v=5') format('woff2'),
+        url('./QuanSlim/QuanSlim-Light.woff?v=5') format('woff'),
+        url('./QuanSlim/QuanSlim-Light.ttf?v=5') format('truetype');
     font-weight: 300;
     font-style: normal;
     font-display: swap;

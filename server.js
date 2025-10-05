@@ -79,13 +79,27 @@ app.get('/QuanSlim/*', (req, res) => {
     const filePath = path.join(__dirname, req.path);
     const ext = path.extname(filePath).toLowerCase();
     
-    if (ext === '.woff') res.setHeader('Content-Type', 'font/woff');
-    else if (ext === '.woff2') res.setHeader('Content-Type', 'font/woff2');
-    else if (ext === '.ttf') res.setHeader('Content-Type', 'font/ttf');
-    else if (ext === '.eot') res.setHeader('Content-Type', 'application/vnd.ms-fontobject');
+    console.log('🔤 Font file path:', filePath);
+    console.log('🔤 Font file extension:', ext);
     
+    let contentType = 'application/octet-stream';
+    if (ext === '.woff') contentType = 'font/woff';
+    else if (ext === '.woff2') contentType = 'font/woff2';
+    else if (ext === '.ttf') contentType = 'font/ttf';
+    else if (ext === '.eot') contentType = 'application/vnd.ms-fontobject';
+    
+    console.log('🔤 Setting Content-Type:', contentType);
+    res.setHeader('Content-Type', contentType);
     res.setHeader('Cache-Control', 'public, max-age=86400');
-    res.sendFile(filePath);
+    
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            console.error('❌ Error serving font file:', err);
+            res.status(404).send('Font file not found');
+        } else {
+            console.log('✅ Successfully served font file:', req.path);
+        }
+    });
 });
 
 // API route for art generation
