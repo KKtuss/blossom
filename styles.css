@@ -1,5 +1,33 @@
-/* Import local QuanSlim fonts */
-@import url('./QuanSlim/stylesheet.css?v=3');
+/* QuanSlim Font Definitions */
+@font-face {
+    font-family: 'Quan Slim';
+    src: url('./QuanSlim/QuanSlim-Regular.woff2?v=4') format('woff2'),
+         url('./QuanSlim/QuanSlim-Regular.woff?v=4') format('woff'),
+         url('./QuanSlim/QuanSlim-Regular.ttf?v=4') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Quan Slim';
+    src: url('./QuanSlim/QuanSlim-Bold.woff2?v=4') format('woff2'),
+         url('./QuanSlim/QuanSlim-Bold.woff?v=4') format('woff'),
+         url('./QuanSlim/QuanSlim-Bold.ttf?v=4') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Quan Slim';
+    src: url('./QuanSlim/QuanSlim-Light.woff2?v=4') format('woff2'),
+         url('./QuanSlim/QuanSlim-Light.woff?v=4') format('woff'),
+         url('./QuanSlim/QuanSlim-Light.ttf?v=4') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
 
 :root {
     /* Simplified Blue/Purple Color Palette */
