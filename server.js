@@ -30,6 +30,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Serve font test page
+app.get('/font-test', (req, res) => {
+    res.sendFile(path.join(__dirname, 'font-test.html'));
+});
+
 // Explicit routes for static files to ensure proper MIME types
 app.get('/styles.css', (req, res) => {
     res.setHeader('Content-Type', 'text/css');
@@ -63,7 +68,7 @@ app.get('/Github button.png', (req, res) => {
 
 // Serve font stylesheet
 app.get('/QuanSlim/stylesheet.css', (req, res) => {
-    console.log('📄 Serving QuanSlim stylesheet.css');
+    console.log('📄 Serving QuanSlim stylesheet.css from:', path.join(__dirname, 'QuanSlim', 'stylesheet.css'));
     res.setHeader('Content-Type', 'text/css');
     res.setHeader('Cache-Control', 'public, max-age=3600');
     res.sendFile(path.join(__dirname, 'QuanSlim', 'stylesheet.css'));
@@ -175,6 +180,9 @@ app.get('/api/health', (req, res) => {
 // Debug route to see all requests
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.path} - ${req.headers['content-type'] || 'no content-type'}`);
+    if (req.path.includes('QuanSlim') || req.path.includes('static')) {
+        console.log('🔍 Font/static request detected:', req.path);
+    }
     next();
 });
 

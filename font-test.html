@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Font Test</title>
+    <style>
+        @import url('./QuanSlim/stylesheet.css?v=4');
+        body {
+            font-family: 'Quan Slim', sans-serif;
+            font-size: 24px;
+            padding: 20px;
+        }
+        .test-text {
+            font-family: 'Quan Slim', sans-serif;
+            font-size: 32px;
+            color: #00BFFF;
+        }
+    </style>
+</head>
+<body>
+    <h1>Font Loading Test</h1>
+    <p class="test-text">This text should be in QuanSlim font if it's loading correctly.</p>
+    <p>Regular text for comparison.</p>
+    
+    <script>
+        // Test if fonts are loading
+        document.fonts.ready.then(() => {
+            console.log('✅ Fonts loaded successfully');
+            document.body.style.backgroundColor = '#0D0D0D';
+            document.body.style.color = '#00BFFF';
+        }).catch((error) => {
+            console.error('❌ Font loading failed:', error);
+            document.body.style.backgroundColor = '#ff0000';
+        });
+    </script>
+</body>
+</html>
