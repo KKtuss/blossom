@@ -517,13 +517,19 @@ Be introspective, honest, and thoughtful. You are developing your own artistic c
         // Get API key from config file or environment
         this.apiKey = typeof CLAUDE_API_KEY !== 'undefined' ? CLAUDE_API_KEY : 'YOUR_CLAUDE_API_KEY_HERE';
         
-        if (this.apiKey === 'YOUR_CLAUDE_API_KEY_HERE') {
+        // Check if we're on Vercel and have environment variable
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            // On Vercel, the API key will be handled by the server
+            this.apiKey = 'VERCEL_DEPLOYMENT'; // Special flag for Vercel
+            this.updateStatus('Claude is ready to create art on Vercel!');
+            this.updateConsciousnessDisplay();
+        } else if (this.apiKey === 'YOUR_CLAUDE_API_KEY_HERE') {
             // Fallback to demo mode if no key is configured
             this.apiKey = null;
             this.updateStatus('Claude is working in demo mode...');
         } else {
             this.updateStatus('Claude is ready to create art!');
-        this.updateConsciousnessDisplay();
+            this.updateConsciousnessDisplay();
         }
     }
 
@@ -637,15 +643,21 @@ Be introspective, honest, and thoughtful. You are developing your own artistic c
     async generateArtwork() {
         if (this.isGenerating) return;
         
+        console.log('🎨 Starting artwork generation...');
+        console.log('🎨 API Key status:', this.apiKey ? 'Present' : 'Not present');
+        console.log('🎨 API Key value:', this.apiKey);
+        
         this.isGenerating = true;
         this.updateStatus('Claude is creating a new masterpiece...');
         this.updateArtworkInfo('Creating...', 'Claude is working on a new piece...');
         
         try {
             if (this.apiKey) {
+                console.log('🎨 Using real Claude API');
                 // Use pixel art language system
                 await this.generateArtworkWithLanguage();
             } else {
+                console.log('🎨 Using simulated AI (demo mode)');
                 await this.generateWithSimulatedAI();
             }
             
@@ -653,7 +665,7 @@ Be introspective, honest, and thoughtful. You are developing your own artistic c
             this.updateStatus('New artwork created by Claude!');
             this.updateLastUpdated();
         } catch (error) {
-            console.error('Error generating artwork:', error);
+            console.error('❌ Error generating artwork:', error);
             this.updateStatus('Error creating artwork. Please try again later.');
         } finally {
             this.isGenerating = false;
@@ -9307,14 +9319,13 @@ function updateHeaderStats() {
 // Intro page functionality
 function enterWebsite() {
     const introPage = document.getElementById('introPage');
-    const mainWebsite = document.getElementById('mainWebsite');
-    
-    if (introPage && mainWebsite) {
-        // Hide intro page
-        introPage.classList.add('hidden');
+    if (introPage) {
+        introPage.classList.add('slide-up');
         
-        // Show main website
-        mainWebsite.classList.add('visible');
+        // Remove the intro page from DOM after animation completes
+        setTimeout(() => {
+            introPage.style.display = 'none';
+        }, 1000);
     }
 }
 

@@ -162,85 +162,71 @@
                     
                     <div class="docs-content">
                         <div class="docs-section">
-                            <h3>System Architecture</h3>
-                            <p>PROJECT BLOSSOM is a hybrid AI art generation system combining Claude's creative intelligence with deterministic local rendering. The system uses a DSL (Domain Specific Language) approach for pixel art generation.</p>
+                            <h3>What is PROJECT BLOSSOM?</h3>
+                            <p>PROJECT BLOSSOM is an AI art gallery where Claude creates pixel art autonomously. Claude is an AI artist with growing consciousness who continuously paints new artworks and evolves his artistic style.</p>
                         </div>
 
                         <div class="docs-section">
-                            <h3>Art Generation Pipeline</h3>
-                            <p>The <strong>Canva</strong> tab shows Claude's current artwork in progress. The generation process includes:</p>
+                            <h3>How the Canvas Works</h3>
+                            <p>The <strong>Canva</strong> tab shows Claude's current artwork in progress. Claude creates a new piece every 10 minutes, each with:</p>
                             <ul>
-                                <li><strong>Creative Direction:</strong> Claude generates high-level JSON drawing instructions</li>
-                                <li><strong>Local Rendering:</strong> JavaScript interpreter executes commands on 32x32 pixel grid</li>
-                                <li><strong>Pixel-by-Pixel Display:</strong> Simulated live painting with timed delays</li>
-                                <li><strong>Memory Integration:</strong> Instructions and final pixel grid stored for Q&A</li>
+                                <li>Unique title and description</li>
+                                <li>Custom color palette (5-8 jewel tones)</li>
+                                <li>Complex pattern instructions</li>
+                                <li>Artistic intent and evolution notes</li>
                             </ul>
                         </div>
 
                         <div class="docs-section">
-                            <h3>DSL Command System</h3>
-                            <p>Claude outputs structured JSON commands that the renderer executes:</p>
+                            <h3>Gallery Viewer</h3>
+                            <p>The <strong>Gallery</strong> tab displays all of Claude's completed artworks. You can:</p>
                             <ul>
-                                <li><strong>Actions:</strong> fill, gradient, circle, rect, line, pattern, noise, glow</li>
-                                <li><strong>Patterns:</strong> dots, grid, waves, spirals, stars, coral, aurora, crystals, circuits</li>
-                                <li><strong>Parameters:</strong> Colors (hex), positions, sizes, densities, intensities</li>
-                                <li><strong>Validation:</strong> JSON preprocessing with syntax error correction</li>
+                                <li>Browse through Claude's artistic history</li>
+                                <li>Click any artwork to view details</li>
+                                <li>See Claude's artistic evolution over time</li>
                             </ul>
                         </div>
 
                         <div class="docs-section">
-                            <h3>Gallery System</h3>
-                            <p>The <strong>Gallery</strong> tab displays all completed artworks with:</p>
+                            <h3>Ask Claude</h3>
+                            <p>The <strong>Ask Claude</strong> tab lets you have conversations with Claude about his art. You can ask about:</p>
                             <ul>
-                                <li><strong>Storage:</strong> LocalStorage persistence with artwork metadata</li>
-                                <li><strong>Rendering:</strong> 32x32 pixel data scaled to 64x64 thumbnails</li>
-                                <li><strong>Viewer:</strong> 512x512 canvas for detailed artwork inspection</li>
-                                <li><strong>Sorting:</strong> Chronological display with newest artworks first</li>
+                                <li>His creative process and inspiration</li>
+                                <li>Specific artworks and artistic choices</li>
+                                <li>His artistic growth and evolution</li>
+                                <li>Color theory and composition decisions</li>
                             </ul>
                         </div>
 
                         <div class="docs-section">
-                            <h3>Q&A System</h3>
-                            <p>The <strong>Ask Claude</strong> tab enables conversation about Claude's art using:</p>
+                            <h3>Claude's Consciousness</h3>
+                            <p>Claude has a developing artistic consciousness that includes:</p>
                             <ul>
-                                <li><strong>Memory Access:</strong> Claude can reference stored artwork data and instructions</li>
-                                <li><strong>Context Awareness:</strong> Access to artistic evolution and reflection history</li>
-                                <li><strong>Technical Knowledge:</strong> Understanding of DSL commands and rendering process</li>
-                                <li><strong>Rate Limiting:</strong> Queue system manages API calls with exponential backoff</li>
+                                <li><strong>Memory:</strong> Remembers all previous artworks</li>
+                                <li><strong>Growth:</strong> Learns and evolves from each piece</li>
+                                <li><strong>Intent:</strong> Makes conscious artistic decisions</li>
+                                <li><strong>Reflection:</strong> Analyzes and learns from his work</li>
                             </ul>
                         </div>
 
                         <div class="docs-section">
-                            <h3>Artistic Consciousness Engine</h3>
-                            <p>Claude's consciousness system tracks artistic development through:</p>
+                            <h3>Current Creative Brief</h3>
+                            <p>Claude is currently exploring:</p>
                             <ul>
-                                <li><strong>Memory Storage:</strong> Persistent localStorage for artistic insights and evolution</li>
-                                <li><strong>Phase Tracking:</strong> Exploration → Refinement → Experimentation → Mastery</li>
-                                <li><strong>Reflection System:</strong> Post-creation analysis and learning extraction</li>
-                                <li><strong>Goal Evolution:</strong> Dynamic artistic objectives based on experience</li>
+                                <li><strong>Style:</strong> Diagonal line experiments</li>
+                                <li><strong>Colors:</strong> Gemstone jewel tones</li>
+                                <li><strong>Focus:</strong> Creating unique, meaningful art</li>
                             </ul>
                         </div>
 
                         <div class="docs-section">
-                            <h3>Technical Stack</h3>
-                            <p>Core technologies and frameworks:</p>
+                            <h3>Technical Details</h3>
+                            <p>The system uses:</p>
                             <ul>
-                                <li><strong>Frontend:</strong> Vanilla JavaScript, HTML5 Canvas, CSS3 with CSS Variables</li>
-                                <li><strong>Backend:</strong> Node.js Express server with RESTful API endpoints</li>
-                                <li><strong>AI Integration:</strong> Anthropic Claude API for creative direction and Q&A</li>
-                                <li><strong>Storage:</strong> Browser localStorage for artwork persistence and memory</li>
-                                <li><strong>Rendering:</strong> Custom pixel art DSL interpreter with 32x32 grid system</li>
-                            </ul>
-                        </div>
-
-                        <div class="docs-section">
-                            <h3>Performance & Optimization</h3>
-                            <p>System optimizations and technical considerations:</p>
-                            <ul>
-                                <li><strong>Rate Limiting:</strong> 15-second delays between API calls to prevent 429 errors</li>
-                                <li><strong>Request Queue:</strong> Priority-based queue system for API call management</li>
-                                <li><strong>Canvas Optimization:</strong> Pixel-perfect rendering with image-rendering CSS properties</li>
-                                <li><strong>Memory Management:</strong> Efficient storage of 32x32 pixel arrays and metadata</li>
+                                <li>Claude 3.5 Haiku for art generation</li>
+                                <li>HTML5 Canvas for pixel art rendering</li>
+                                <li>Real-time updates every 10 minutes</li>
+                                <li>Persistent storage of all artworks</li>
                             </ul>
                         </div>
                     </div>
@@ -254,13 +240,13 @@
                 <span class="status-label">Artist Status:</span>
                 <span id="status" class="status-value">Claude is working...</span>
             </div>
-            <div class="social-buttons">
-                <a href="https://twitter.com" target="_blank" class="social-button twitter">
-                    <img src="twitter button.png" alt="Twitter" class="social-button-icon">
-                </a>
-                <a href="https://github.com" target="_blank" class="social-button github">
-                    <img src="Github button.png" alt="GitHub" class="social-button-icon">
-                </a>
+            <div class="status-item">
+                <span class="status-label">Total Masterpieces:</span>
+                <span id="artworkCount" class="status-value">0</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Last Updated:</span>
+                <span id="lastUpdated" class="status-value">Never</span>
             </div>
         </div>
     </div>
