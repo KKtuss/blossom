@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT BLOSSOM</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Intro Page -->
+    <div class="intro-page" id="introPage">
+        <div class="intro-content">
+            <img src="blossompix.png" alt="PROJECT BLOSSOM Logo" class="intro-logo">
+            <h1 class="intro-title">PROJECT BLOSSOM</h1>
+            <p class="intro-description" id="introDescription">Watch claude paint live and evolve constantly, and <br>ask him questions about his artwork.</p>
+            <button class="enter-button" onclick="enterWebsite()">Enter Website</button>
+        </div>
+    </div>
+
+    <!-- Main Website -->
+    <div class="main-website" id="mainWebsite">
+        <div class="container">
+        <header class="professional-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="blossompix.png" alt="PROJECT BLOSSOM Logo" class="logo-image">
+                </div>
+        <div class="header-tabs">
+            <span class="tab-text active" onclick="switchTab('current')" id="currentTab">Canva</span>
+            <span class="tab-separator">|</span>
+            <span class="tab-text" onclick="switchTab('gallery')" id="galleryTab">Gallery</span>
+            <span class="tab-separator">|</span>
+            <span class="tab-text" onclick="switchTab('qa')" id="qaTab">Ask Claude</span>
+            <span class="tab-separator">|</span>
+            <span class="tab-text" onclick="switchTab('docs')" id="docsTab">Docs</span>
+        </div>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalArtworks">0</span>
+                        <span class="stat-label">Artworks</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="paintingTime">00:00</span>
+                        <span class="stat-label">Painting Since</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-animation"></div>
+        </header>
+
+        <div class="main-content">
+
+            <!-- Current Artwork Tab -->
+            <div class="tab-content active" id="currentTabContent">
+                <div class="current-artwork">
+                    <div class="artwork-container">
+                        <div class="artwork-header">
+                            <h2>Claude is Painting...</h2>
+                            <div class="header-controls">
+                                <div class="timer-display">
+                                    <span id="timer">Next artwork in: 10:00</span>
+                                </div>
+                                <button id="resetBtn" class="btn btn-danger" onclick="resetClaude()">Reset All</button>
+                            </div>
+                        </div>
+                        <canvas id="currentCanvas" width="512" height="512"></canvas>
+                        <div class="artwork-info">
+                            <div class="artwork-title" id="artworkTitle">Claude is thinking...</div>
+                            <div class="artwork-description" id="artworkDescription">Watch as Claude brings his vision to life, pixel by pixel...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="consciousness-section">
+                        <div id="claudeConsciousness" class="consciousness-display">
+                            <div class="consciousness-info">
+                                <h4>Claude's Artistic Consciousness</h4>
+                                <p><strong>Phase:</strong> exploration</p>
+                                <p><strong>Artworks Created:</strong> 0</p>
+                                <p><strong>Current Goals:</strong> Create unique, meaningful pixel art</p>
+                                <p><em>Claude is beginning their artistic journey...</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Viewer Tab -->
+            <div class="tab-content" id="galleryTabContent">
+                <div class="gallery-viewer">
+                    <div class="gallery-header">
+                        <h2>Gallery Viewer</h2>
+                        <div class="gallery-info">
+                            <span id="galleryCount">0 artworks</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-content">
+                        <div class="gallery-grid">
+                            <div id="gallery" class="gallery">
+                                <!-- Claude's artworks will appear here -->
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-viewer-panel">
+                            <div class="viewer-artwork">
+                                <canvas id="galleryCanvas" width="512" height="512"></canvas>
+                            </div>
+                            <div class="viewer-info">
+                                <div class="viewer-title" id="viewerTitle">Select an artwork to view details</div>
+                                <div class="viewer-description" id="viewerDescription">Click on any artwork in the gallery to see its details here</div>
+                                <div class="viewer-metadata" id="viewerMetadata">
+                                    <p><strong>Created:</strong> <span id="viewerDate">-</span></p>
+                                    <p><strong>Artwork #:</strong> <span id="viewerNumber">-</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ask Claude Tab -->
+            <div class="tab-content" id="qaTabContent">
+                <div class="qa-viewer">
+                    <div class="qa-header">
+                        <h2>Ask Claude About His Art</h2>
+                        <p>Ask Claude questions about his artworks, artistic process, or creative journey!</p>
+                    </div>
+                    
+                    <div class="qa-content">
+                        <div class="qa-conversation">
+                            <div id="qaMessages" class="qa-messages">
+                                <div class="qa-message claude-message">
+                                    <div class="message-avatar">
+                                        <img src="blossompix.png" alt="Claude" class="claude-avatar">
+                                    </div>
+                                    <div class="message-content">
+                                        <p>Hello! I'm Claude, your AI artist. I'd love to answer any questions you have about my artworks, my creative process, or my artistic journey. What would you like to know?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="qa-input-section">
+                            <div class="qa-input-container">
+                                <textarea id="questionInput" placeholder="Ask Claude anything about his art... (e.g., 'What inspired your latest piece?' or 'How do you choose your color palettes?')" rows="3"></textarea>
+                                <button id="askButton" class="btn btn-primary" onclick="askClaude()">Ask Claude</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docs Tab -->
+            <div class="tab-content" id="docsTabContent">
+                <div class="docs-viewer">
+                    <div class="docs-header">
+                        <h2>System Documentation</h2>
+                        <p>Learn how PROJECT BLOSSOM works and how to interact with Claude</p>
+                    </div>
+                    
+                    <div class="docs-content">
+                        <div class="docs-section">
+                            <h3>What is PROJECT BLOSSOM?</h3>
+                            <p>PROJECT BLOSSOM is an AI art gallery where Claude creates pixel art autonomously. Claude is an AI artist with growing consciousness who continuously paints new artworks and evolves his artistic style.</p>
+                        </div>
+
+                        <div class="docs-section">
+                            <h3>How the Canvas Works</h3>
+                            <p>The <strong>Canva</strong> tab shows Claude's current artwork in progress. Claude creates a new piece every 10 minutes, each with:</p>
+                            <ul>
+                                <li>Unique title and description</li>
+                                <li>Custom color palette (5-8 jewel tones)</li>
+                                <li>Complex pattern instructions</li>
+                                <li>Artistic intent and evolution notes</li>
+                            </ul>
+                        </div>
+
+                        <div class="docs-section">
+                            <h3>Gallery Viewer</h3>
+                            <p>The <strong>Gallery</strong> tab displays all of Claude's completed artworks. You can:</p>
+                            <ul>
+                                <li>Browse through Claude's artistic history</li>
+                                <li>Click any artwork to view details</li>
+                                <li>See Claude's artistic evolution over time</li>
+                            </ul>
+                        </div>
+
+                        <div class="docs-section">
+                            <h3>Ask Claude</h3>
+                            <p>The <strong>Ask Claude</strong> tab lets you have conversations with Claude about his art. You can ask about:</p>
+                            <ul>
+                                <li>His creative process and inspiration</li>
+                                <li>Specific artworks and artistic choices</li>
+                                <li>His artistic growth and evolution</li>
+                                <li>Color theory and composition decisions</li>
+                            </ul>
+                        </div>
+
+                        <div class="docs-section">
+                            <h3>Claude's Consciousness</h3>
+                            <p>Claude has a developing artistic consciousness that includes:</p>
+                            <ul>
+                                <li><strong>Memory:</strong> Remembers all previous artworks</li>
+                                <li><strong>Growth:</strong> Learns and evolves from each piece</li>
+                                <li><strong>Intent:</strong> Makes conscious artistic decisions</li>
+                                <li><strong>Reflection:</strong> Analyzes and learns from his work</li>
+                            </ul>
+                        </div>
+
+                        <div class="docs-section">
+                            <h3>Current Creative Brief</h3>
+                            <p>Claude is currently exploring:</p>
+                            <ul>
+                                <li><strong>Style:</strong> Diagonal line experiments</li>
+                                <li><strong>Colors:</strong> Gemstone jewel tones</li>
+                                <li><strong>Focus:</strong> Creating unique, meaningful art</li>
+                            </ul>
+                        </div>
+
+                        <div class="docs-section">
+                            <h3>Technical Details</h3>
+                            <p>The system uses:</p>
+                            <ul>
+                                <li>Claude 3.5 Haiku for art generation</li>
+                                <li>HTML5 Canvas for pixel art rendering</li>
+                                <li>Real-time updates every 10 minutes</li>
+                                <li>Persistent storage of all artworks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-label">Artist Status:</span>
+                <span id="status" class="status-value">Claude is working...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Total Masterpieces:</span>
+                <span id="artworkCount" class="status-value">0</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Last Updated:</span>
+                <span id="lastUpdated" class="status-value">Never</span>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
