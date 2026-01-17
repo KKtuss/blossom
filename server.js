@@ -13,14 +13,9 @@ app.use(cors({
 
 // Security headers
 app.use((req, res, next) => {
-    res.setHeader('Content-Security-Policy', 
-        "default-src 'self'; " +
-        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-        "font-src 'self' https://fonts.gstatic.com; " +
-        "script-src 'self' 'unsafe-inline'; " +
-        "img-src 'self' data:; " +
-        "connect-src 'self' https://api.anthropic.com;"
-    );
+    // Remove strict Content-Security-Policy to allow loading of styles and scripts
+    // This is often a cause of issues on Vercel deployments
+    
     // Explicitly allow caching for static assets
     if (req.path.match(/\.(css|js|png|jpg|jpeg|gif|ico)$/)) {
         res.setHeader('Cache-Control', 'public, max-age=3600');
