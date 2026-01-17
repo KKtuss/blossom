@@ -21,6 +21,10 @@ app.use((req, res, next) => {
         "img-src 'self' data:; " +
         "connect-src 'self' https://api.anthropic.com;"
     );
+    // Explicitly allow caching for static assets
+    if (req.path.match(/\.(css|js|png|jpg|jpeg|gif|ico)$/)) {
+        res.setHeader('Cache-Control', 'public, max-age=3600');
+    }
     next();
 });
 
