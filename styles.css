@@ -792,6 +792,7 @@ body::before {
     }
     
     .header-content {
+        display: flex;
         flex-direction: column;
         gap: 15px;
     }
@@ -800,33 +801,123 @@ body::before {
         width: 100%;
         justify-content: center;
         overflow-x: auto;
+        padding-bottom: 5px; /* Space for scrollbar if visible */
+    }
+
+    /* Hide scrollbar for cleaner look */
+    .header-tabs::-webkit-scrollbar {
+        height: 4px;
     }
 }
 
 @media (max-width: 768px) {
     .professional-header {
-        flex-direction: column;
         padding: 15px;
-        gap: 15px;
+        margin-bottom: 20px;
     }
     
     .header-stats {
         width: 100%;
-        justify-content: space-around;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
     }
     
+    .artwork-container {
+        padding: 15px; /* Reduced padding */
+    }
+
     .artwork-header {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        margin-bottom: 20px;
         flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .header-controls {
+        flex-direction: column;
+        width: 100%;
         gap: 10px;
+    }
+
+    .timer-display {
+        width: 100%;
+        text-align: center;
+    }
+
+    #resetBtn {
+        width: 100%;
     }
     
     #currentCanvas {
         margin: 20px 0;
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px; /* Maximize screen real estate */
+    }
+
+    /* Intro Page Mobile Optimization */
+    .intro-logo {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 20px;
+    }
+
+    .intro-title {
+        font-size: 3rem;
+        letter-spacing: 2px;
+    }
+
+    .intro-description {
+        font-size: 1rem;
+        padding: 0 10px;
+        min-height: auto; /* Let it grow naturally */
+    }
+
+    .enter-button {
+        font-size: 1.5rem;
+        padding: 12px 30px;
+        width: 100%;
+        max-width: 250px;
+    }
+
+    /* Header & Tabs */
+    .tab-text {
+        font-size: 1.2rem;
+        padding: 8px 15px;
+    }
+
+    .stat-number {
+        font-size: 1.4rem;
+    }
+
+    /* Typography Scaling */
+    .artwork-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .artwork-title {
+        font-size: 1.8rem;
+    }
+
+    .gallery-header h2, 
+    .qa-header h2, 
+    .docs-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .docs-viewer, .qa-viewer, .gallery-viewer {
+        padding: 20px;
     }
 }
 
