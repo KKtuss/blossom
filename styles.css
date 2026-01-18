@@ -812,54 +812,78 @@ body::before {
 
 @media (max-width: 768px) {
     .professional-header {
-        position: relative; /* Not sticky on mobile */
+        position: relative;
         top: 0;
-        padding: 10px;
+        padding: 10px 12px;
         margin-bottom: 15px;
-        border-radius: 0; /* Full width feel */
-        border-left: none;
-        border-right: none;
-        border-top: none;
+        /* Restore nice card look but compact */
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
     }
 
     .header-content {
+        display: grid;
+        grid-template-areas: 
+            "logo stats"
+            "tabs tabs";
+        grid-template-columns: auto 1fr;
         gap: 10px;
+        width: 100%;
     }
 
+    .logo-section {
+        grid-area: logo;
+        margin-right: 0;
+    }
+    
     .logo-image {
-        width: 50px;
-        height: 50px;
+        width: 32px; /* Smaller logo */
+        height: 32px;
+        margin-right: 8px;
     }
 
-    .header-tabs {
-        padding: 2px;
-        border-radius: 8px;
+    .header-stats {
+        grid-area: stats;
+        width: 100%;
+        justify-content: flex-end; /* Align to right */
+        gap: 15px;
+        padding-top: 0;
+        border-top: none;
+        flex-wrap: nowrap;
     }
 
-    .tab-text {
-        font-size: 1rem;
-        padding: 6px 12px;
+    .stat-item {
+        align-items: flex-end;
     }
 
     .stat-number {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        line-height: 1;
     }
 
     .stat-label {
         font-size: 0.6rem;
+        display: none; /* Hide labels to save vertical space */
     }
-    
-    .header-stats {
+
+    .header-tabs {
+        grid-area: tabs;
         width: 100%;
-        justify-content: space-around;
-        gap: 10px;
-        flex-wrap: nowrap; /* Keep on one line if possible */
-        padding-top: 5px;
-        border-top: 1px solid var(--border-color);
+        padding: 2px;
+        border-radius: 8px;
+        justify-content: space-between;
+        gap: 5px;
+    }
+
+    .tab-text {
+        font-size: 0.85rem;
+        padding: 6px 0;
+        text-align: center;
+        flex: 1; /* Distribute tabs evenly */
     }
     
     .artwork-container {
-        padding: 15px; /* Reduced padding */
+        padding: 15px;
     }
 
     .artwork-header {
