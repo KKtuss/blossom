@@ -812,15 +812,50 @@ body::before {
 
 @media (max-width: 768px) {
     .professional-header {
-        padding: 15px;
-        margin-bottom: 20px;
+        position: relative; /* Not sticky on mobile */
+        top: 0;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 0; /* Full width feel */
+        border-left: none;
+        border-right: none;
+        border-top: none;
+    }
+
+    .header-content {
+        gap: 10px;
+    }
+
+    .logo-image {
+        width: 50px;
+        height: 50px;
+    }
+
+    .header-tabs {
+        padding: 2px;
+        border-radius: 8px;
+    }
+
+    .tab-text {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+
+    .stat-number {
+        font-size: 1.2rem;
+    }
+
+    .stat-label {
+        font-size: 0.6rem;
     }
     
     .header-stats {
         width: 100%;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 10px;
+        flex-wrap: nowrap; /* Keep on one line if possible */
+        padding-top: 5px;
+        border-top: 1px solid var(--border-color);
     }
     
     .artwork-container {
